@@ -6,6 +6,7 @@ public static class Boostrapper
     private static void Initialize()
     {
         Debug.Log("initialize boostrapper");
+
+        ServiceLocator.Clear();
     }
 }
-
