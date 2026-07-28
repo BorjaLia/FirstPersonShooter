@@ -36,7 +36,7 @@ public static class ServiceLocator
             Debug.Log($"Service of type {type.Name} Unregistered.");
         }
     }
-
+ 
     public static void Clear()
     {
         _services.Clear();
