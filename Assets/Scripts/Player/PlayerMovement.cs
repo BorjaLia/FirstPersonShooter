@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 1.0f;
     [SerializeField] private float walkSpeed = 1.0f;
     [SerializeField] private float runSpeed = 1.0f;
+    [SerializeField] private Vector2 lookSensitivity = new Vector2 (50.0f, 50.0f);
 
     [SerializeField] private Camera cam;
     private Rigidbody rb;
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isRunning = true;
     private bool isGrounded = true;
 
+    private float xRotation = 0f;
 
     void Start()
     {
@@ -35,8 +37,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Look();
         Move();
+    }
+
+    private void LateUpdate()
+    {
+        Look();
     }
 
     private void Move()
@@ -46,15 +52,27 @@ public class PlayerMovement : MonoBehaviour
         //Walk
         Vector3 dir = new Vector3(inputDir.x, 0.0f, inputDir.y);
         dir *= currentSpeed;
-        if (inputDir != Vector2.zero) rb.AddRelativeForce(dir,ForceMode.Acceleration);
+        if (inputDir != Vector2.zero) rb.AddRelativeForce(dir, ForceMode.Acceleration);
 
         //jump
-        if (queueJump && isGrounded) rb.AddRelativeForce(new Vector3(0.0f,jumpForce,0.0f),ForceMode.VelocityChange);
+        if (queueJump && isGrounded)
+        {
+            rb.AddRelativeForce(new Vector3(0.0f, jumpForce, 0.0f), ForceMode.VelocityChange);
+            queueJump = false;
+            isGrounded = false;
+        }
     }
 
     private void Look()
     {
+        if (lookDir == Vector2.zero) return;
 
+        transform.Rotate(transform.up, lookDir.x * lookSensitivity.x * Time.deltaTime);
+
+        xRotation -= lookDir.y * lookSensitivity.y * Time.deltaTime;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
 
     public void OnMove(InputValue value)
