@@ -7,6 +7,7 @@ public class PlayerShooting : MonoBehaviour
 
     [Header("Input map")]
     [SerializeField] public InputActionReference shootActionReference;
+    [SerializeField] public InputActionReference reloadActionReference;
 
     [Header("Weapon Stats")]
     [SerializeField] private const int magCapacity = 12;
@@ -22,7 +23,7 @@ public class PlayerShooting : MonoBehaviour
     private float timeBetweenShots = 1.0f/fireRate;
 
     private bool queueShot = false;
-    private float lastShotTime = 0.0f;
+    private float lastShotTimer = 0.0f;
 
     private bool queueReload = false;
     private float currentReloadTime = 0.0f;
@@ -35,6 +36,13 @@ public class PlayerShooting : MonoBehaviour
         {
             queueShot = true;
         }
+
+        if (reloadActionReference.action.WasPressedThisFrame())
+        {
+            queueReload = true;
+        }
+
+        ShootUpdate();
 
         ReloadUpdate();
     }
@@ -51,6 +59,8 @@ public class PlayerShooting : MonoBehaviour
         if (!queueShot) return;
         queueShot = false;
 
+        if (!(lastShotTimer == 0.0f)) return;
+
         if (!(currentReloadTime == 0.0f)) return;
 
         if (currentMag == 0)
@@ -58,6 +68,12 @@ public class PlayerShooting : MonoBehaviour
             Debug.Log("No more bulletes");
             return;
         }
+
+        lastShotTimer = timeBetweenShots;
+
+        currentMag--;
+
+        Debug.Log($"Mag: {currentMag} / {magCapacity}");
 
         RaycastHit hit;
 
@@ -70,6 +86,17 @@ public class PlayerShooting : MonoBehaviour
         {
             Debug.DrawRay(cam.transform.position, cam.transform.forward * 1000, Color.red);
             Debug.Log("Did not Hit");
+        }
+    }
+    private void ShootUpdate()
+    {
+        if (lastShotTimer > 0.0f)
+        {
+            lastShotTimer -= Time.deltaTime;
+            if (lastShotTimer <= 0.0f)
+            {
+                lastShotTimer = 0.0f;
+            }
         }
     }
 
