@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 1.0f;
     [SerializeField] private float walkSpeed = 1.0f;
     [SerializeField] private float runSpeed = 1.0f;
+    [SerializeField] private float airMovementMultiplier = 0.5f;
     [SerializeField] private Vector2 lookSensitivity = new Vector2 (50.0f, 50.0f);
 
     [Header("Ground Check Settings")]
@@ -56,22 +57,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
         float currentSpeed = isRunning ? runSpeed : walkSpeed;
+        if (!isGrounded) currentSpeed *= airMovementMultiplier;
 
         //Walk
-        //Vector3 dir = new Vector3(inputDir.x, 0.0f, inputDir.y);
-        Vector3 dir = new Vector3(inputDir.x, 0.0f, inputDir.y);
-        dir *= currentSpeed;
-        //if (inputDir != Vector2.zero) rb.AddRelativeForce(dir, ForceMode.Acceleration);
         if (inputDir != Vector2.zero)
         {
+            Vector3 dir = new Vector3(inputDir.x, 0.0f, inputDir.y);
+
+            dir *= currentSpeed;
             dir.y = rb.linearVelocity.y;
+
             rb.linearVelocity = Vector3.zero;
             if (inputDir != Vector2.zero) rb.AddRelativeForce(dir,ForceMode.VelocityChange);
         }
 
         //jump
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         
         if (queueJump && isGrounded)
         {
@@ -91,11 +94,6 @@ public class PlayerMovement : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-    }
-
-    private void CheckGround()
-    {
-
     }
 
     public void OnMove(InputValue value)
