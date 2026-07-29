@@ -1,10 +1,97 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerShooting : MonoBehaviour
 {
+
+    [Header("Input map")]
+    [SerializeField] public InputActionReference shootActionReference;
+
+    [Header("Weapon Stats")]
+    [SerializeField] private const int magCapacity = 12;
+    [SerializeField] private const float fireRate = 3.0f;
+    [SerializeField] private const float reloadTime = 1.5f;
+
+    [Header("Bullet")]
+    [SerializeField] private LayerMask bulletLayerMask;
+    [SerializeField] private float bulletDamage = 10.0f;
+
+    [SerializeField] private Camera cam;
+
+    private float timeBetweenShots = 1.0f/fireRate;
+
+    private bool queueShot = false;
+    private float lastShotTime = 0.0f;
+
+    private bool queueReload = false;
+    private float currentReloadTime = 0.0f;
+
+    private int currentMag = magCapacity;
+
     private void Update()
     {
-        
+        if (shootActionReference.action.IsPressed())
+        {
+            queueShot = true;
+        }
+
+        ReloadUpdate();
+    }
+
+    void FixedUpdate()
+    {
+        Shoot();
+
+        Reload();
+    }
+
+    private void Shoot()
+    {
+        if (!queueShot) return;
+        queueShot = false;
+
+        if (!(currentReloadTime == 0.0f)) return;
+
+        if (currentMag == 0)
+        {
+            Debug.Log("No more bulletes");
+            return;
+        }
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, cam.farClipPlane, bulletLayerMask))
+        {
+            Debug.DrawRay(cam.transform.position, cam.transform.forward * hit.distance, Color.green);
+            Debug.Log("Did Hit");
+        }
+        else
+        {
+            Debug.DrawRay(cam.transform.position, cam.transform.forward * 1000, Color.red);
+            Debug.Log("Did not Hit");
+        }
+    }
+
+    private void Reload()
+    {
+        if (!queueReload) return;
+        queueReload = false;
+
+        if (!(currentReloadTime == 0.0f)) return;
+
+        currentReloadTime = reloadTime;
+    }
+    private void ReloadUpdate()
+    {
+        if (currentReloadTime > 0.0f)
+        {
+            currentReloadTime -= Time.deltaTime;
+            if (currentReloadTime <= 0.0f)
+            {
+                currentReloadTime = 0.0f;
+                currentMag = magCapacity;
+            }
+        }
     }
 }
