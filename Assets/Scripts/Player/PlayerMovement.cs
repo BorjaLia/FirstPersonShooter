@@ -12,6 +12,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float runSpeed = 1.0f;
     [SerializeField] private Vector2 lookSensitivity = new Vector2 (50.0f, 50.0f);
 
+    [Header("Ground Check Settings")]
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundDistance = 0.4f;
+    [SerializeField] private LayerMask groundMask;
+
     [SerializeField] private Camera cam;
     private Rigidbody rb;
 
@@ -28,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         if (!rb) Debug.LogError("No rigidbody found!");
+
+        if (!cam) Debug.LogError("No camera found!");
+
+        if (!groundCheck) Debug.LogError("No floor check found!");
     }
 
     void Update()
@@ -50,11 +59,20 @@ public class PlayerMovement : MonoBehaviour
         float currentSpeed = isRunning ? runSpeed : walkSpeed;
 
         //Walk
+        //Vector3 dir = new Vector3(inputDir.x, 0.0f, inputDir.y);
         Vector3 dir = new Vector3(inputDir.x, 0.0f, inputDir.y);
         dir *= currentSpeed;
-        if (inputDir != Vector2.zero) rb.AddRelativeForce(dir, ForceMode.Acceleration);
+        //if (inputDir != Vector2.zero) rb.AddRelativeForce(dir, ForceMode.Acceleration);
+        if (inputDir != Vector2.zero)
+        {
+            dir.y = rb.linearVelocity.y;
+            rb.linearVelocity = Vector3.zero;
+            if (inputDir != Vector2.zero) rb.AddRelativeForce(dir,ForceMode.VelocityChange);
+        }
 
         //jump
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        
         if (queueJump && isGrounded)
         {
             rb.AddRelativeForce(new Vector3(0.0f, jumpForce, 0.0f), ForceMode.VelocityChange);
@@ -73,6 +91,11 @@ public class PlayerMovement : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+    }
+
+    private void CheckGround()
+    {
+
     }
 
     public void OnMove(InputValue value)
