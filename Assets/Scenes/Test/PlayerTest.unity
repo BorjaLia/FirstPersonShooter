@@ -524,12 +524,20 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
+      propertyPath: dashForce
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
       propertyPath: jumpForce
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
       propertyPath: walkSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
+      propertyPath: dashCooldown
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
       propertyPath: lookSensitivity.x
@@ -539,6 +547,10 @@ PrefabInstance:
       propertyPath: lookSensitivity.y
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
+      propertyPath: dashActionReference
+      value: 
+      objectReference: {fileID: 5958645476863851934, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
       propertyPath: airMovementMultiplier
       value: 0.5

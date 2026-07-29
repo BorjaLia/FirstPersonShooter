@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
 
+    [Header("Input map")]
+    [SerializeField] public InputActionReference dashActionReference;
+
     [Header("Camera settings")]
     [SerializeField] private Vector2 lookSensitivity = new Vector2(50.0f, 50.0f);
 
@@ -18,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Dash settings")]
     [SerializeField] private float dashForce = 1.0f;
     [SerializeField] private float dashCooldown = 1.0f;
+    [SerializeField] private float dashCoyote = 0.1f;
 
     [Header("Ground Check Settings")]
     [SerializeField] private Transform groundCheck;
@@ -31,9 +35,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 lookDir = new Vector2(0.0f, 0.0f);
 
     private float currentDashCooldown = 0.0f;
-    private bool queueJump = false;
-
     private bool queueDash = false;
+
+    private bool queueJump = false;
     private bool isGrounded = true;
 
     private float xRotation = 0f;
@@ -50,7 +54,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
+        if (dashActionReference.action.WasPressedThisFrame())
+        {
+            queueDash = true;
+        }
     }
 
     void FixedUpdate()
@@ -67,21 +74,24 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        float currentSpeed = walkSpeed;
-        if (!isGrounded) currentSpeed *= airMovementMultiplier;
 
         //Walk
         if (inputDir != Vector2.zero)
         {
-            Vector3 dir = new Vector3(inputDir.x, 0.0f, inputDir.y);
+            float currentSpeed = walkSpeed;
+
+            Vector3 dir = new Vector3(inputDir.x, 0.0f, inputDir.y);    
 
             dir *= currentSpeed;
             dir.y = rb.linearVelocity.y;
 
             rb.linearVelocity = Vector3.zero;
-            rb.AddRelativeForce(dir, ForceMode.VelocityChange);
-
+            
             Dash(dir);
+
+            if (!isGrounded) currentSpeed *= airMovementMultiplier;
+
+            rb.AddRelativeForce(dir, ForceMode.VelocityChange);
         }
 
         //jump
@@ -89,23 +99,28 @@ public class PlayerMovement : MonoBehaviour
         if (queueJump && isGrounded)
         {
             rb.AddRelativeForce(new Vector3(0.0f, jumpForce, 0.0f), ForceMode.VelocityChange);
-            queueJump = false;
             isGrounded = false;
         }
+        queueJump = false;
     }
 
-    private void Dash(Vector2 dir)
+    private void Dash(Vector3 dir)
     {
        if (currentDashCooldown > 0.0f)
         {
             currentDashCooldown -= Time.deltaTime;
-            if (currentDashCooldown < 0.0f) currentDashCooldown = 0.0f;
+            if (currentDashCooldown < 0.0f)
+            {
+                currentDashCooldown = 0.0f;
+                Debug.Log("Dash Ready");
+            }
+            if (currentDashCooldown >= dashCoyote) queueDash = false;
             return;
         }
 
         if (queueDash)
         {
-            rb.AddRelativeForce(dir * dashForce, ForceMode.Impulse);
+            rb.AddRelativeForce(new Vector3(dir.x * dashForce, 0.0f,dir.z * dashForce), ForceMode.VelocityChange);
             currentDashCooldown = dashCooldown;
             queueDash = false;
         }
@@ -136,10 +151,5 @@ public class PlayerMovement : MonoBehaviour
     public void OnJump(InputValue value)
     {
         queueJump = true;
-    }
-
-    public void OnSprint(InputValue value)
-    {
-        queueDash = true;
     }
 }
