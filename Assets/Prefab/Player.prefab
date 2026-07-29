@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 8142779461953626188}
   - component: {fileID: 2481773194317881863}
   - component: {fileID: 6882291718326841076}
+  - component: {fileID: 2459781127447389015}
   - component: {fileID: 7340773049308303501}
   - component: {fileID: 4023754494271125257}
   m_Layer: 0
@@ -302,6 +303,7 @@ MonoBehaviour:
   jumpForce: 1
   walkSpeed: 1
   runSpeed: 1
+  airMovementMultiplier: 0.5
   lookSensitivity: {x: 50, y: 50}
   groundCheck: {fileID: 711112313688865471}
   groundDistance: 0.2
@@ -309,6 +311,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cam: {fileID: 7666224746802916685}
+--- !u!114 &2459781127447389015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6906350855942301854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab02a21cf9638584e9aeda484cd2d3c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
 --- !u!114 &7340773049308303501
 MonoBehaviour:
   m_ObjectHideFlags: 0
