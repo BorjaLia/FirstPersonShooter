@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float airMovementMultiplier = 0.5f;
 
     [Header("Dash settings")]
-    [SerializeField] private float dashForce = 1.0f;
+    [SerializeField] private float dashForce = 15.0f;
+    [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashCooldown = 1.0f;
     [SerializeField] private float dashCoyote = 0.1f;
 
@@ -36,6 +37,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 lookDir = new Vector2(0.0f, 0.0f);
 
     private float currentDashCooldown = 0.0f;
+    private float dashTimer = 0.0f;
+    private bool isDashing = false;
+    private Vector3 currentDashDirection;
     private bool queueDash = false;
 
     private bool queueJump = false;
@@ -75,28 +79,24 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
+        Dash();
 
-        //Walk
-        if (inputDir != Vector2.zero)
+        if (!isDashing)
         {
-            float currentSpeed = walkSpeed;
+            Vector3 currentHorizontalVel = new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z);
+            rb.AddForce(-currentHorizontalVel * dragCoeficient, ForceMode.VelocityChange);
 
-            Vector3 dir = new Vector3(inputDir.x, 0.0f, inputDir.y);    
-
-            dir *= currentSpeed;
-            //dir.y = rb.linearVelocity.y;
-
-            //rb.linearVelocity = Vector3.zero;
-
-            rb.AddForce(-(new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z) * dragCoeficient),ForceMode.VelocityChange);
-
-            Dash(dir);
+            //Walk
+            if (inputDir != Vector2.zero)
+        {
+            Vector3 dir = new Vector3(inputDir.x, 0.0f, inputDir.y);
+            dir *= walkSpeed;
 
             if (!isGrounded) dir *= airMovementMultiplier;
 
             rb.AddRelativeForce(dir, ForceMode.VelocityChange);
         }
-
+    }
         //jump
 
         if (queueJump && isGrounded)
@@ -107,25 +107,39 @@ public class PlayerMovement : MonoBehaviour
         queueJump = false;
     }
 
-    private void Dash(Vector3 dir)
+    private void Dash()
     {
-       if (currentDashCooldown > 0.0f)
-        {
-            currentDashCooldown -= Time.deltaTime;
-            if (currentDashCooldown < 0.0f)
-            {
-                currentDashCooldown = 0.0f;
-                Debug.Log("Dash Ready");
-            }
-            if (currentDashCooldown >= dashCoyote) queueDash = false;
-            return;
-        }
+        if (currentDashCooldown > 0.0f) currentDashCooldown -= Time.fixedDeltaTime;
 
         if (queueDash)
         {
-            rb.AddRelativeForce(new Vector3(dir.x * dashForce, 0.0f,dir.z * dashForce), ForceMode.VelocityChange);
-            currentDashCooldown = dashCooldown;
+            if (currentDashCooldown <= dashCoyote)
+            {
+                isDashing = true;
+                dashTimer = dashDuration;
+                currentDashCooldown = dashCooldown;
+
+                Vector3 input = new Vector3(inputDir.x, 0.0f, inputDir.y);
+                Vector3 localDashDir = input != Vector3.zero ? input.normalized : Vector3.forward;
+
+                currentDashDirection = transform.TransformDirection(localDashDir);
+            }
             queueDash = false;
+        }
+
+        if (isDashing)
+        {
+            dashTimer -= Time.fixedDeltaTime;
+
+            if (dashTimer <= 0.0f) isDashing = false;
+            else
+            {
+                rb.linearVelocity = new Vector3(
+                    currentDashDirection.x * dashForce,
+                    rb.linearVelocity.y,
+                    currentDashDirection.z * dashForce
+                );
+            }
         }
     }
 

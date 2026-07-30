@@ -1092,7 +1092,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
       propertyPath: dashForce
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
       propertyPath: jumpForce
@@ -1100,7 +1100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
       propertyPath: walkSpeed
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
       propertyPath: dragCoeficient

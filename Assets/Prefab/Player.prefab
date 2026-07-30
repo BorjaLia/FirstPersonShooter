@@ -315,11 +315,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   dashActionReference: {fileID: 5958645476863851934, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   lookSensitivity: {x: 35, y: 35}
-  jumpForce: 1
-  walkSpeed: 1
-  dragCoeficient: 0
+  jumpForce: 6
+  walkSpeed: 5
+  dragCoeficient: 0.75
   airMovementMultiplier: 0.5
-  dashForce: 1
+  dashForce: 20
+  dashDuration: 0.2
   dashCooldown: 1
   dashCoyote: 0.1
   groundCheck: {fileID: 711112313688865471}
