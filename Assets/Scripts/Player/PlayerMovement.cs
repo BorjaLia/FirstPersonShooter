@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement settings")]
     [SerializeField] private float jumpForce = 1.0f;
     [SerializeField] private float walkSpeed = 1.0f;
+    [SerializeField] private float dragCoeficient = 0.75f;
     [SerializeField] private float airMovementMultiplier = 0.5f;
 
     [Header("Dash settings")]
@@ -83,13 +84,15 @@ public class PlayerMovement : MonoBehaviour
             Vector3 dir = new Vector3(inputDir.x, 0.0f, inputDir.y);    
 
             dir *= currentSpeed;
-            dir.y = rb.linearVelocity.y;
+            //dir.y = rb.linearVelocity.y;
 
-            rb.linearVelocity = Vector3.zero;
-            
+            //rb.linearVelocity = Vector3.zero;
+
+            rb.AddForce(-(new Vector3(rb.linearVelocity.x, 0.0f, rb.linearVelocity.z) * dragCoeficient),ForceMode.VelocityChange);
+
             Dash(dir);
 
-            if (!isGrounded) currentSpeed *= airMovementMultiplier;
+            if (!isGrounded) dir *= airMovementMultiplier;
 
             rb.AddRelativeForce(dir, ForceMode.VelocityChange);
         }

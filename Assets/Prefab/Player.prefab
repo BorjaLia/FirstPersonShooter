@@ -317,6 +317,7 @@ MonoBehaviour:
   lookSensitivity: {x: 35, y: 35}
   jumpForce: 1
   walkSpeed: 1
+  dragCoeficient: 0
   airMovementMultiplier: 0.5
   dashForce: 1
   dashCooldown: 1
