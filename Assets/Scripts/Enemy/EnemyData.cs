@@ -3,17 +3,20 @@ using UnityEngine;
 public abstract class EnemyData : ScriptableObject
 {
     [Header("Base Stats")]
-    public float maxHealth = 100f;
+    public float maxHealth = 100.0f;
+
     public float moveSpeed = 3.5f;
-    public float acceleration = 8f;
-    public float stoppingDistance = 1f;
+    public float acceleration = 8.0f;
+    
+    public float attackDamage = 20.0f;
+    public float detectionRange = 20.0f;
+    public float stoppingDistance = 1.0f;
 }
 
 [CreateAssetMenu(fileName = "NewMeleeData", menuName = "Enemies/Melee Data")]
 public class MeleeData : EnemyData
 {
     [Header("Melee Specifics")]
-    public float attackDamage = 20f;
     public float attackRange = 1.5f;
     public float attackCooldown = 1.5f;
 }

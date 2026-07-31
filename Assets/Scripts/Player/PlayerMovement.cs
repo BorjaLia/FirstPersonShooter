@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     [Header("Input map")]
     [SerializeField] public InputActionReference dashActionReference;
 
@@ -49,6 +48,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        // TEMP
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        // (move to game manager)
+
         rb = GetComponent<Rigidbody>();
         if (!rb) Debug.LogError("No rigidbody found!");
 
@@ -147,9 +151,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (lookDir == Vector2.zero) return;
 
-        transform.Rotate(transform.up, lookDir.x * lookSensitivity.x * Time.deltaTime);
+        transform.Rotate(transform.up, lookDir.x * lookSensitivity.x);
 
-        xRotation -= lookDir.y * lookSensitivity.y * Time.deltaTime;
+        xRotation -= lookDir.y * lookSensitivity.y;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);

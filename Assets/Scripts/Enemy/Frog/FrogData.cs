@@ -5,9 +5,8 @@ using UnityEngine;
 public class FrogData : EnemyData
 {
     [Header("Frog Specifics")]
-    public float explosionRadius = 5f;
-    public float explosionDamage = 50f;
-    public float jumpTriggerDistance = 8f;
-    public float jumpDuration = 1f;
+    public float explosionRadius = 5.0f;
+    public float explosionTimer = 5.0f;
+    public float jumpDuration = 1.0f;
     public GameObject explosionVFX;
 }

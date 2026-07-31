@@ -10,17 +10,19 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] public InputActionReference reloadActionReference;
 
     [Header("Weapon Stats")]
-    [SerializeField] private const int magCapacity = 12;
-    [SerializeField] private const float fireRate = 3.0f;
-    [SerializeField] private const float reloadTime = 1.5f;
+    [SerializeField] private int magCapacity = 12;
+    [SerializeField] private float fireRate = 3.0f;
+    [SerializeField] private float reloadTime = 1.5f;
 
     [Header("Bullet")]
     [SerializeField] private LayerMask bulletLayerMask;
     [SerializeField] private float bulletDamage = 10.0f;
+    [SerializeField] private GameObject bulletSFX;
+    [SerializeField] private Transform bullets;
 
     [SerializeField] private Camera cam;
 
-    private float timeBetweenShots = 1.0f/fireRate;
+    private float timeBetweenShots = 1.0f;
 
     private bool queueShot = false;
     private float lastShotTimer = 0.0f;
@@ -28,7 +30,13 @@ public class PlayerShooting : MonoBehaviour
     private bool queueReload = false;
     private float currentReloadTime = 0.0f;
 
-    private int currentMag = magCapacity;
+    private int currentMag;
+
+    private void Start()
+    {
+        timeBetweenShots = 1.0f / fireRate;
+        currentMag = magCapacity;
+    }
 
     private void Update()
     {
@@ -79,6 +87,7 @@ public class PlayerShooting : MonoBehaviour
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, cam.farClipPlane, bulletLayerMask))
         {
+            Instantiate(bulletSFX);
             Debug.DrawRay(cam.transform.position, cam.transform.forward * hit.distance, Color.green);
             Debug.Log("Did Hit");
         }

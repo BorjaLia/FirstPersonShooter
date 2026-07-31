@@ -10,12 +10,14 @@ public class FrogEnemy : EnemyBase
 
     public FrogIdleState IdleState { get; private set; }
     public FrogJumpState JumpState { get; private set; }
+    public FrogExplodeState ExplodeState { get; private set; }
 
     protected override void Start()
     {
         base.Start();
         IdleState = new FrogIdleState(this);
         JumpState = new FrogJumpState(this);
+        ExplodeState = new FrogExplodeState(this);
 
         ChangeState(IdleState);
     }
@@ -36,7 +38,7 @@ public class FrogEnemy : EnemyBase
         {
             if (col.CompareTag("Player"))
             {
-                col.GetComponent<PlayerHealth>().TakeDamage(config.explosionDamage);
+                col.GetComponent<PlayerHealth>().TakeDamage(config.attackDamage);
                 Debug.Log("Player caught in Frog Explosion");
             }
         }
@@ -50,14 +52,17 @@ public class FrogIdleState : IState
 
     public void Enter()
     {
-        frog.Agent.isStopped = true;
-        frog.Anim.SetTrigger("Idle");
+        Debug.Log("Frog entered Idle!");
+
+        frog.anim.SetTrigger("Idle");
+        frog.agent.isStopped = true;
     }
 
     public void UpdateLogic()
     {
         float distance = Vector3.Distance(frog.transform.position, frog.playerTarget.position);
-        if (distance <= frog.config.jumpTriggerDistance)
+
+        if (distance <= frog.config.detectionRange)
         {
             frog.ChangeState(frog.JumpState);
         }
@@ -70,31 +75,71 @@ public class FrogJumpState : IState
 {
     private FrogEnemy frog;
     private float jumpTimer;
+    private Vector3 jumpDir;
 
     public FrogJumpState(FrogEnemy frog) { this.frog = frog; }
 
     public void Enter()
     {
-        jumpTimer = 0f;
-        frog.Anim.SetTrigger("Jump");
+        Debug.Log("Frog entered Jump!");
 
-        frog.Agent.isStopped = true;
-        frog.Agent.updatePosition = false;
+        frog.anim.SetTrigger("Jump");
+        jumpTimer = 0.0f;
+
+        jumpDir = (frog.transform.forward + frog.transform.up).normalized;
+
+        frog.agent.isStopped = true;
+        frog.agent.updatePosition = false;
     }
 
     public void UpdateLogic()
     {
-        jumpTimer += Time.deltaTime;
+        float distance = Vector3.Distance(frog.transform.position, frog.playerTarget.position);
 
-        float jumpProgress = jumpTimer / frog.config.jumpDuration;
-        Vector3 targetPos = new Vector3(frog.playerTarget.position.x, frog.transform.position.y, frog.playerTarget.position.z);
-        frog.transform.position = Vector3.Lerp(frog.transform.position, targetPos, jumpProgress * Time.deltaTime * 5f);
-
-        if (jumpTimer >= frog.config.jumpDuration)
+        if (distance <= frog.config.stoppingDistance)
         {
-            frog.Explode();
-            Object.Destroy(frog.gameObject);
+            frog.ChangeState(frog.ExplodeState);
         }
+
+        jumpTimer -= Time.deltaTime;
+
+        if (jumpTimer > 0.0f) return;
+
+        frog.transform.LookAt(frog.playerTarget,Vector3.up);
+        jumpDir = (Vector3.forward + Vector3.up).normalized * frog.config.acceleration;
+        frog.rb.AddRelativeForce(jumpDir,ForceMode.VelocityChange);
+        jumpTimer = frog.config.jumpDuration;
+    }
+    public void Exit() { }
+}
+
+public class FrogExplodeState : IState
+{
+    private FrogEnemy frog;
+    private float explosionCountown;
+
+    public FrogExplodeState(FrogEnemy frog) { this.frog = frog; }
+
+    public void Enter()
+    {
+        Debug.Log("Frog entered Explode!");
+        frog.anim.SetTrigger("Idle");
+        explosionCountown = frog.config.explosionTimer;
+
+        frog.rb.freezeRotation = false;
+
+        frog.agent.isStopped = true;
+        frog.agent.updatePosition = false;
+    }
+
+    public void UpdateLogic()
+    {
+        explosionCountown -= Time.deltaTime;
+
+        if (explosionCountown > 0.0f) return;
+
+        frog.Explode();
+        Object.Destroy(frog.gameObject);
     }
     public void Exit() { }
 }

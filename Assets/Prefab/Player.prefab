@@ -168,6 +168,37 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &6855058794308954892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8930789203493273935}
+  m_Layer: 0
+  m_Name: Bullets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8930789203493273935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6855058794308954892}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8657893488094270535}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6906350855942301854
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +238,7 @@ Transform:
   m_Children:
   - {fileID: 2245622716966777678}
   - {fileID: 711112313688865471}
+  - {fileID: 8930789203493273935}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1733605709540882866
@@ -314,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   dashActionReference: {fileID: 5958645476863851934, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  lookSensitivity: {x: 35, y: 35}
+  lookSensitivity: {x: 0.15, y: 0.15}
   jumpForce: 6
   walkSpeed: 5
   dragCoeficient: 0.75
@@ -343,10 +375,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
   shootActionReference: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   reloadActionReference: {fileID: 8229701719573433512, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  magCapacity: 12
+  fireRate: 3
+  reloadTime: 1.5
   bulletLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
   bulletDamage: 1.5
+  bulletSFX: {fileID: 0}
+  bullets: {fileID: 8930789203493273935}
   cam: {fileID: 7666224746802916685}
 --- !u!114 &7340773049308303501
 MonoBehaviour:

@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb67972a86fff3b47a4b42b9d68b9513, type: 3}
   m_Name: NormalFrogData
   m_EditorClassIdentifier: Assembly-CSharp::FrogData
-  maxHealth: 100
-  moveSpeed: 3.5
-  acceleration: 8
+  maxHealth: 40
+  moveSpeed: 0.01
+  acceleration: 6
+  attackDamage: 20
+  detectionRange: 20
   stoppingDistance: 1
   explosionRadius: 5
-  explosionDamage: 50
-  jumpTriggerDistance: 8
+  explosionTimer: 2
   jumpDuration: 1
   explosionVFX: {fileID: 0}

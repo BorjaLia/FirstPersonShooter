@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
+[RequireComponent(typeof(NavMeshAgent), typeof(Animator), typeof(Rigidbody))]
 public abstract class EnemyBase : MonoBehaviour
 {
     public abstract EnemyData baseStats { get; }
@@ -10,29 +10,34 @@ public abstract class EnemyBase : MonoBehaviour
     protected float currentHealth;
     public Transform playerTarget;
 
-    public NavMeshAgent Agent { get; private set; }
-    public Animator Anim { get; private set; }
+    public NavMeshAgent agent { get; private set; }
+    public Animator anim { get; private set; }
+    public Rigidbody rb { get; private set; }
 
     protected IState currentState;
 
     protected virtual void Awake()
     {
-        Agent = GetComponent<NavMeshAgent>();
-        Anim = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
+
+        rb.freezeRotation = true;
 
         if (playerTarget == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null) playerTarget = player.transform;
+            else Debug.LogError("No player found!");
         }
     }
 
     protected virtual void Start()
     {
         currentHealth = baseStats.maxHealth;
-        Agent.speed = baseStats.moveSpeed;
-        Agent.acceleration = baseStats.acceleration;
-        Agent.stoppingDistance = baseStats.stoppingDistance;
+        agent.speed = baseStats.moveSpeed;
+        agent.acceleration = baseStats.acceleration;
+        agent.stoppingDistance = baseStats.stoppingDistance;
     }
 
     protected virtual void Update()
@@ -52,7 +57,7 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(float amount)
     {
         currentHealth -= amount;
-        Anim.SetTrigger("Hit");
+        anim.SetTrigger("Hit");
 
         if (currentHealth <= 0)
         {
@@ -62,8 +67,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Die()
     {
-        Anim.SetTrigger("Die");
-        Agent.isStopped = true;
+        anim.SetTrigger("Die");
+        agent.isStopped = true;
 
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;
