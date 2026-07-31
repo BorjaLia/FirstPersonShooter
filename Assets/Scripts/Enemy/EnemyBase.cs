@@ -57,7 +57,9 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(float amount)
     {
         currentHealth -= amount;
-        anim.SetTrigger("Hit");
+        anim.Play("Hit");
+
+        Debug.Log("Enemy: Yeouch!");
 
         if (currentHealth <= 0)
         {
@@ -67,8 +69,10 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Die()
     {
-        anim.SetTrigger("Die");
+        anim.Play("Die");
         agent.isStopped = true;
+
+        Debug.Log("Enemy died");
 
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;

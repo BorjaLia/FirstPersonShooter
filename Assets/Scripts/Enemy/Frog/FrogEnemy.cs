@@ -54,7 +54,7 @@ public class FrogIdleState : IState
     {
         Debug.Log("Frog entered Idle!");
 
-        frog.anim.SetTrigger("Idle");
+        frog.anim.Play("Idle");
         frog.agent.isStopped = true;
     }
 
@@ -83,7 +83,6 @@ public class FrogJumpState : IState
     {
         Debug.Log("Frog entered Jump!");
 
-        frog.anim.SetTrigger("Jump");
         jumpTimer = 0.0f;
 
         jumpDir = (frog.transform.forward + frog.transform.up).normalized;
@@ -105,9 +104,16 @@ public class FrogJumpState : IState
 
         if (jumpTimer > 0.0f) return;
 
+        frog.anim.Play("Idle");
+        frog.anim.Play("Jump");
+
         frog.transform.LookAt(frog.playerTarget,Vector3.up);
+
         jumpDir = (Vector3.forward + Vector3.up).normalized * frog.config.acceleration;
+
+        frog.rb.linearVelocity = Vector3.zero;
         frog.rb.AddRelativeForce(jumpDir,ForceMode.VelocityChange);
+
         jumpTimer = frog.config.jumpDuration;
     }
     public void Exit() { }
@@ -123,7 +129,7 @@ public class FrogExplodeState : IState
     public void Enter()
     {
         Debug.Log("Frog entered Explode!");
-        frog.anim.SetTrigger("Idle");
+        frog.anim.Play("Idle");
         explosionCountown = frog.config.explosionTimer;
 
         frog.rb.freezeRotation = false;
