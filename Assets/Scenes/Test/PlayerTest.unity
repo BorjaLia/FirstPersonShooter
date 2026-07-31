@@ -470,11 +470,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!20 &1314146722 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7666224746802916685, guid: 7055b154807671e498f3360184782748, type: 3}
-  m_PrefabInstance: {fileID: 4083314105782377361}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4083314105782377361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -483,82 +478,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2245622716966777678, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2245622716966777678, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2245622716966777678, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2245622716966777678, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2245622716966777678, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2459781127447389015, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: reloadActionReference
-      value: 
-      objectReference: {fileID: 8229701719573433512, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-    - target: {fileID: 4023754494271125257, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 4023754494271125257, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: m_LinearDamping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4023754494271125257, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: m_AngularDamping
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 1314146722}
-    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: runSpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: dashForce
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: jumpForce
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: walkSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: dashCooldown
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: lookSensitivity.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: lookSensitivity.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: dashActionReference
-      value: 
-      objectReference: {fileID: 5958645476863851934, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-    - target: {fileID: 6882291718326841076, guid: 7055b154807671e498f3360184782748, type: 3}
-      propertyPath: airMovementMultiplier
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6906350855942301854, guid: 7055b154807671e498f3360184782748, type: 3}
       propertyPath: m_Name
       value: Player

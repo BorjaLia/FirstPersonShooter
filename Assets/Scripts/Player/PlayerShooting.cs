@@ -87,7 +87,7 @@ public class PlayerShooting : MonoBehaviour
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, cam.farClipPlane, bulletLayerMask))
         {
-            Instantiate(bulletSFX);
+            Instantiate(bulletSFX, hit.point, Quaternion.LookRotation(-hit.normal));
             Debug.DrawRay(cam.transform.position, cam.transform.forward * hit.distance, Color.green);
             Debug.Log("Did Hit");
         }

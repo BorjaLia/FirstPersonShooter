@@ -382,7 +382,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   bulletDamage: 1.5
-  bulletSFX: {fileID: 0}
+  bulletSFX: {fileID: 2315831782768919845, guid: cf2e59e2cbf2a0849b0ddad755bdc7ba, type: 3}
   bullets: {fileID: 8930789203493273935}
   cam: {fileID: 7666224746802916685}
 --- !u!114 &7340773049308303501
