@@ -20,3 +20,5 @@ First person shooter
 [Gun Reload sound](https://pixabay.com/es/sound-effects/pel%C3%ADculas-y-efectos-especiales-gun-reload-511309/) by [DRAGON-STUDIO](https://pixabay.com/es/users/dragon-studio-38165424/)
 
 [Gun Shot sound](https://pixabay.com/es/sound-effects/pel%C3%ADculas-y-efectos-especiales-five-seven-gun-shot-and-silenced-104500/) by [freesound_community](https://pixabay.com/es/users/freesound_community-46691455/)
+
+[Font](https://fonts.google.com/selection?preview.text=Toon%20Shootout&categoryFilters=Appearance:%2FTheme%2FBlobby&preview.script=Latn) by [Toshi Omagari]() and [Jennifer Daniel]()
