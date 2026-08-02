@@ -28,9 +28,15 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip gameplayMusic;
     [SerializeField] private AudioClip ambientSound;
 
-    protected void Initialize()
+    private void Awake()
     {
+        ServiceLocator.Register<AudioManager>(this);
+        DontDestroyOnLoad(gameObject);
+    }
 
+    private void OnDestroy()
+    {
+        ServiceLocator.Unregister<AudioManager>();
     }
 
     public void PlaySFX(string soundName)
