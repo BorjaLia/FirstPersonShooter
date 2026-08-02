@@ -120,7 +120,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079969085266288134}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -170,8 +170,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FrogEnemy
   playerTarget: {fileID: 0}
-  attackSound: {fileID: 8300000, guid: 97bcbc528ad344442a6f619d76e837ff, type: 3}
-  hitSound: {fileID: 8300000, guid: a01e188978408af4cbe07508e984d6a2, type: 3}
   audioManager: {fileID: 0}
   frogConfig: {fileID: 11400000, guid: b3f160428272ff8458ec9341cc577edf, type: 2}
 --- !u!54 &6949081737561445479
