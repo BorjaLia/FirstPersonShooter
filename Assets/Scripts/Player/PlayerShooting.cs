@@ -41,6 +41,8 @@ public class PlayerShooting : MonoBehaviour
 
     private void Start()
     {
+        audioManager = ServiceLocator.Get<AudioManager>();
+
         timeBetweenShots = 1.0f / fireRate;
         currentMag = magCapacity;
     }
