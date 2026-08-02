@@ -1,0 +1,57 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class MainMenuManager : MonoBehaviour
+{
+    [Header("UI Panels")]
+    [SerializeField] private GameObject mainPanel;
+    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject creditsPanel;
+
+    [Header("Level Data")]
+    [SerializeField] private string gameplaySceneName = "GameplayScene";
+    [SerializeField] private LevelConfig levelConfig;
+
+    private void Start()
+    {
+        ShowPanel(mainPanel);
+    }
+
+    public void PlayGame()
+    {
+        IGameplayManager gameplayManager = ServiceLocator.Get<IGameplayManager>();
+
+        if (levelConfig != null)
+        {
+            gameplayManager.SetConfig(levelConfig);
+        }
+        else
+        {
+            Debug.LogError("No Level Config");
+        }
+
+        SceneManager.LoadScene(gameplaySceneName);
+    }
+
+    public void OpenSettings() => ShowPanel(settingsPanel);
+    public void OpenCredits() => ShowPanel(creditsPanel);
+    public void BackToMain() => ShowPanel(mainPanel);
+
+    public void ExitGame()
+    {
+        Debug.Log("Exiting Game...");
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
+    private void ShowPanel(GameObject panelToShow)
+    {
+        if (mainPanel) mainPanel.SetActive(panelToShow == mainPanel);
+        if (settingsPanel) settingsPanel.SetActive(panelToShow == settingsPanel);
+        if (creditsPanel) creditsPanel.SetActive(panelToShow == creditsPanel);
+    }
+}

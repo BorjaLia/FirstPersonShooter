@@ -6,7 +6,8 @@ public interface IGameplayManager
     event Action OnWinConditionMet;
     event Action OnLoseConditionMet;
 
-    void StartLevel(LevelConfig levelConfig);
+    void SetConfig(LevelConfig levelConfig);
+    void StartLevel();
 
     void RegisterEnemyDeath();
     void RegisterPlayerDeath();

@@ -23,15 +23,19 @@ public class GameplayLevelManager : MonoBehaviour, IGameplayManager
         ServiceLocator.Unregister<IGameplayManager>();
     }
 
-    public void StartLevel(LevelConfig levelConfig)
+    public void SetConfig(LevelConfig levelConfig)
     {
-        if (levelConfig == null)
+        currentLevelConfig = levelConfig;
+    }
+
+    public void StartLevel()
+    {
+        if (currentLevelConfig == null)
         {
             Debug.LogError("Cannot start level");
             return;
         }
 
-        currentLevelConfig = levelConfig;
         isGameOver = false;
         activeEnemyCount = 0;
 
