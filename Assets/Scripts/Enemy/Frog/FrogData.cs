@@ -9,4 +9,6 @@ public class FrogData : EnemyData
     public float explosionTimer = 5.0f;
     public float jumpDuration = 1.0f;
     public GameObject explosionVFX;
+    [Header("Audio")]
+    public AudioClip jumpSound;
 }

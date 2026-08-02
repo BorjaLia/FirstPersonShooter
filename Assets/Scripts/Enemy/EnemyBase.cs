@@ -10,16 +10,11 @@ public abstract class EnemyBase : MonoBehaviour
     protected float currentHealth;
     public Transform playerTarget;
 
-    [Header("Base Audio")]
-    public AudioClip attackSound;
-    public AudioClip hitSound;
-
-
     public NavMeshAgent agent { get; private set; }
     public Animator anim { get; private set; }
     public Rigidbody rb { get; private set; }
 
-    private AudioManager audioManager;
+    public AudioManager audioManager;
 
     protected IState currentState;
 
@@ -70,7 +65,7 @@ public abstract class EnemyBase : MonoBehaviour
 
         Debug.Log("Enemy: Yeouch!");
 
-        audioManager.PlaySFXOnce(hitSound);
+        audioManager.PlaySFXOnce(baseStats.hitSound);
 
         if (currentHealth <= 0)
         {

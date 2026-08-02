@@ -33,6 +33,8 @@ public class FrogEnemy : EnemyBase
         if (config.explosionVFX != null)
             Instantiate(config.explosionVFX, transform.position, Quaternion.identity);
 
+        audioManager.PlaySFXOnce(baseStats.attackSound);
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, config.explosionRadius);
         foreach (Collider col in colliders)
         {
@@ -106,6 +108,7 @@ public class FrogJumpState : IState
 
         frog.anim.Play("Idle");
         frog.anim.Play("Jump");
+        frog.audioManager.PlaySFXOnce(frog.config.jumpSound);
 
         frog.transform.LookAt(frog.playerTarget,Vector3.up);
 

@@ -18,7 +18,10 @@ MonoBehaviour:
   attackDamage: 20
   detectionRange: 20
   stoppingDistance: 1
+  attackSound: {fileID: 8300000, guid: 97bcbc528ad344442a6f619d76e837ff, type: 3}
+  hitSound: {fileID: 8300000, guid: a01e188978408af4cbe07508e984d6a2, type: 3}
   explosionRadius: 5
   explosionTimer: 2
   jumpDuration: 1
   explosionVFX: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: a01e188978408af4cbe07508e984d6a2, type: 3}

@@ -101,7 +101,7 @@ public class PlayerShooting : MonoBehaviour
             Debug.DrawRay(cam.transform.position, cam.transform.forward * hit.distance, Color.green);
             Debug.Log("Did Hit");
 
-            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            if(hit.collider.CompareTag("Enemy"))
             {
                 hit.collider.gameObject.GetComponent<EnemyBase>().TakeDamage(bulletDamage);
             }

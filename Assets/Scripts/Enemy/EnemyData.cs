@@ -11,6 +11,10 @@ public abstract class EnemyData : ScriptableObject
     public float attackDamage = 20.0f;
     public float detectionRange = 20.0f;
     public float stoppingDistance = 1.0f;
+
+    [Header("Base Audio")]
+    public AudioClip attackSound;
+    public AudioClip hitSound;
 }
 
 [CreateAssetMenu(fileName = "NewMeleeData", menuName = "Enemies/Melee Data")]
