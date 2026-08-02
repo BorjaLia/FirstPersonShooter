@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -20,7 +21,13 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private GameObject bulletSFX;
     [SerializeField] private Transform bullets;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip gunShotSound;
+    [SerializeField] private AudioClip reloadSound;
+
     [SerializeField] private Camera cam;
+
+    private AudioManager audioManager;
 
     private float timeBetweenShots = 1.0f;
 
@@ -83,13 +90,23 @@ public class PlayerShooting : MonoBehaviour
 
         Debug.Log($"Mag: {currentMag} / {magCapacity}");
 
+        audioManager.PlaySFXOnce(gunShotSound);
+
         RaycastHit hit;
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, cam.farClipPlane, bulletLayerMask))
         {
-            Instantiate(bulletSFX, hit.point, Quaternion.LookRotation(-hit.normal));
             Debug.DrawRay(cam.transform.position, cam.transform.forward * hit.distance, Color.green);
             Debug.Log("Did Hit");
+
+            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                hit.collider.gameObject.GetComponent<EnemyBase>().TakeDamage(bulletDamage);
+            }
+            else
+            {
+                Instantiate(bulletSFX, hit.point, Quaternion.LookRotation(-hit.normal));
+            }
         }
         else
         {
@@ -117,6 +134,7 @@ public class PlayerShooting : MonoBehaviour
         if (!(currentReloadTime == 0.0f)) return;
 
         currentReloadTime = reloadTime;
+        audioManager.PlaySFXOnce(reloadSound);
     }
     private void ReloadUpdate()
     {

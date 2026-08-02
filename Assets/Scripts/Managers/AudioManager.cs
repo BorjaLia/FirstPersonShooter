@@ -62,6 +62,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlaySFXOnce(AudioClip sfxClip)
+    {
+        sfxSource.PlayOneShot(sfxClip);
+    }
+
     public void PlayMusic(AudioClip musicClip)
     {
         if (musicSource.clip == musicClip) return;

@@ -10,9 +10,16 @@ public abstract class EnemyBase : MonoBehaviour
     protected float currentHealth;
     public Transform playerTarget;
 
+    [Header("Base Audio")]
+    public AudioClip attackSound;
+    public AudioClip hitSound;
+
+
     public NavMeshAgent agent { get; private set; }
     public Animator anim { get; private set; }
     public Rigidbody rb { get; private set; }
+
+    private AudioManager audioManager;
 
     protected IState currentState;
 
@@ -34,6 +41,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Start()
     {
+        audioManager = ServiceLocator.Get<AudioManager>();
+
         currentHealth = baseStats.maxHealth;
         agent.speed = baseStats.moveSpeed;
         agent.acceleration = baseStats.acceleration;
@@ -60,6 +69,8 @@ public abstract class EnemyBase : MonoBehaviour
         anim.Play("Hit");
 
         Debug.Log("Enemy: Yeouch!");
+
+        audioManager.PlaySFXOnce(hitSound);
 
         if (currentHealth <= 0)
         {
