@@ -15,6 +15,8 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         ShowPanel(mainPanel);
+
+        ServiceLocator.Get<AudioManager>().PlayMenuMusic();
     }
 
     public void PlayGame()

@@ -27,4 +27,8 @@ public class GameSettingsManager
         PlayerPrefs.SetFloat(SFXVolumeKey, value);
         PlayerPrefs.Save();
     }
+    public void SaveAll()
+    {
+        PlayerPrefs.Save();
+    }
 }
