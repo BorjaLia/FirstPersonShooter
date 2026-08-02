@@ -80,6 +80,8 @@ public class AudioManager : MonoBehaviour
     {
         if (musicSource.clip == musicClip) return;
 
+        musicSource.Stop();
+
         musicSource.clip = musicClip;
         musicSource.Play();
     }

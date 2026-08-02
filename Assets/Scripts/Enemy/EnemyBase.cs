@@ -84,5 +84,7 @@ public abstract class EnemyBase : MonoBehaviour
         if (col != null) col.enabled = false;
 
         Destroy(gameObject, 3f);
+
+        ServiceLocator.Get<IGameplayManager>().RegisterEnemyDeath();
     }
 }

@@ -26,6 +26,8 @@ public class FrogEnemy : EnemyBase
     {
         Explode();
         Destroy(gameObject);
+
+        ServiceLocator.Get<IGameplayManager>().RegisterEnemyDeath();
     }
 
     public void Explode()
