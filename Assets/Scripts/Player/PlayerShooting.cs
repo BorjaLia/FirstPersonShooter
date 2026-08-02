@@ -130,6 +130,8 @@ public class PlayerShooting : MonoBehaviour
 
     private void Reload()
     {
+        if (currentMag == magCapacity) return;
+
         if (!queueReload) return;
         queueReload = false;
 
