@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewLevelConfig", menuName = "FPS/Level Config")]
-public class LevelConfigSO : ScriptableObject
+[CreateAssetMenu(fileName = "NewLevelConfig", menuName = "Level/Level Config")]
+public class LevelConfig : ScriptableObject
 {
     [Header("Player Settings")]
     public GameObject playerPrefab;
-    public Transform playerSpawnTransform;
+    public Vector3 playerSpawnPosition;
 
     [Header("Enemy Settings")]
     public List<EnemySpawnData> enemiesToSpawn;
@@ -20,5 +20,5 @@ public class LevelConfigSO : ScriptableObject
 public struct EnemySpawnData
 {
     public GameObject enemyPrefab;
-    public Transform spawnTransform;
+    public Vector3 spawnPosition;
 }

@@ -1,25 +1,14 @@
 using System;
 using UnityEngine;
 
-public interface IGameplayManager
-{
-    event Action OnLevelStarted;
-    event Action OnWinConditionMet;
-    event Action OnLoseConditionMet;
-
-    void StartLevel(LevelConfigSO levelConfig);
-
-    void RegisterEnemyDeath();
-    void RegisterPlayerDeath();
-}
-
 public class GameplayLevelManager : MonoBehaviour, IGameplayManager
 {
     public event Action OnLevelStarted;
     public event Action OnWinConditionMet;
     public event Action OnLoseConditionMet;
 
-    private LevelConfigSO currentLevelConfig;
+    private LevelConfig currentLevelConfig;
+
     private int activeEnemyCount = 0;
     private bool isGameOver = false;
 
@@ -33,7 +22,8 @@ public class GameplayLevelManager : MonoBehaviour, IGameplayManager
     {
         ServiceLocator.Unregister<IGameplayManager>();
     }
-    public void StartLevel(LevelConfigSO levelConfig)
+
+    public void StartLevel(LevelConfig levelConfig)
     {
         if (levelConfig == null)
         {
@@ -60,8 +50,8 @@ public class GameplayLevelManager : MonoBehaviour, IGameplayManager
         {
             Instantiate(
                 currentLevelConfig.playerPrefab,
-                currentLevelConfig.playerSpawnTransform.position,
-                currentLevelConfig.playerSpawnTransform.rotation
+                currentLevelConfig.playerSpawnPosition,
+                Quaternion.identity
             );
         }
     }
@@ -72,7 +62,7 @@ public class GameplayLevelManager : MonoBehaviour, IGameplayManager
         {
             if (enemyData.enemyPrefab != null)
             {
-                Instantiate(enemyData.enemyPrefab, enemyData.spawnTransform.position, Quaternion.identity);
+                Instantiate(enemyData.enemyPrefab, enemyData.spawnPosition, Quaternion.identity);
                 activeEnemyCount++;
             }
         }
