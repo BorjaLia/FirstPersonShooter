@@ -34,6 +34,15 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        GameSettingsManager settings = ServiceLocator.Get<GameSettingsManager>();
+
+        SetVolume("MasterVolume", settings.MasterVolume);
+        SetVolume("MusicVolume", settings.MusicVolume);
+        SetVolume("SFXVolume", settings.SFXVolume);
+    }
+
     private void OnDestroy()
     {
         ServiceLocator.Unregister<AudioManager>();

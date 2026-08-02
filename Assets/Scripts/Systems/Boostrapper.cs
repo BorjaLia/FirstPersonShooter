@@ -9,6 +9,9 @@ public static class Boostrapper
 
         ServiceLocator.Clear();
 
+        GameSettingsManager settingsManager = new GameSettingsManager();
+        ServiceLocator.Register<GameSettingsManager>(settingsManager);
+
         GameObject systemsPrefab = Resources.Load<GameObject>("SystemsManager");
 
         if (systemsPrefab != null)
