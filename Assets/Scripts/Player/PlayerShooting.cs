@@ -5,7 +5,6 @@ using UnityEngine.Rendering;
 
 public class PlayerShooting : MonoBehaviour
 {
-
     [Header("Input map")]
     [SerializeField] public InputActionReference shootActionReference;
     [SerializeField] public InputActionReference reloadActionReference;
@@ -39,16 +38,22 @@ public class PlayerShooting : MonoBehaviour
 
     private int currentMag;
 
+    private IGameplayManager gameplayManager;
     private void Start()
     {
         audioManager = ServiceLocator.Get<AudioManager>();
 
         timeBetweenShots = 1.0f / fireRate;
         currentMag = magCapacity;
+
+        gameplayManager = ServiceLocator.Get<IGameplayManager>();
+
     }
 
     private void Update()
     {
+        if (gameplayManager != null && gameplayManager.IsPaused) return;
+
         if (shootActionReference.action.IsPressed())
         {
             queueShot = true;
@@ -66,6 +71,8 @@ public class PlayerShooting : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (gameplayManager != null && gameplayManager.IsPaused) return;
+
         Shoot();
 
         Reload();

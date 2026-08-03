@@ -7,6 +7,8 @@ public class GameplayLevelManager : MonoBehaviour, IGameplayManager
     public event Action OnWinConditionMet;
     public event Action OnLoseConditionMet;
 
+    public bool IsPaused { get; set; } = false;
+
     private LevelConfig currentLevelConfig;
 
     private int activeEnemyCount = 0;
@@ -35,6 +37,9 @@ public class GameplayLevelManager : MonoBehaviour, IGameplayManager
             Debug.LogError("Cannot start level");
             return;
         }
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
         isGameOver = false;
         activeEnemyCount = 0;

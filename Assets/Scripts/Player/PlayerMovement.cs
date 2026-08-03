@@ -46,23 +46,24 @@ public class PlayerMovement : MonoBehaviour
 
     private float xRotation = 0f;
 
+    private IGameplayManager gameplayManager;
+
     void Start()
     {
-        // TEMP
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        // (move to game manager)
-
         rb = GetComponent<Rigidbody>();
         if (!rb) Debug.LogError("No rigidbody found!");
 
         if (!cam) Debug.LogError("No camera found!");
 
         if (!groundCheck) Debug.LogError("No floor check found!");
+
+        gameplayManager = ServiceLocator.Get<IGameplayManager>();
     }
 
     void Update()
     {
+        if (gameplayManager != null && gameplayManager.IsPaused) return;
+
         if (dashActionReference.action.WasPressedThisFrame())
         {
             queueDash = true;
@@ -71,11 +72,14 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (gameplayManager != null && gameplayManager.IsPaused) return;
+
         Move();
     }
 
     private void LateUpdate()
     {
+        if (gameplayManager != null && gameplayManager.IsPaused) return;
         Look();
     }
 
@@ -171,6 +175,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputValue value)
     {
+        if (gameplayManager != null && gameplayManager.IsPaused) return;
+
         queueJump = true;
     }
 }
