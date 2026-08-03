@@ -1014,6 +1014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
   mainPanel: {fileID: 1930099804}
   settingsPanel: {fileID: 1265316840}
+  exitButton: {fileID: 1660153342}
   gameplaySceneName: Level
   levelConfig: {fileID: 11400000, guid: 1fe70e6418f0bc74f9d8f91616ecdf77, type: 2}
 --- !u!4 &1090009519

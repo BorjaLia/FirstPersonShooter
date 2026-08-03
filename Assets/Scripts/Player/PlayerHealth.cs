@@ -52,5 +52,6 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player died!");
+        ServiceLocator.Get<IGameplayManager>().RegisterPlayerDeath();
     }
 }

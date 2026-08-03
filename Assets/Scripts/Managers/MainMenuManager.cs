@@ -7,12 +7,18 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject settingsPanel;
 
+    [SerializeField] private GameObject exitButton;
+
     [Header("Level Data")]
     [SerializeField] private string gameplaySceneName = "Level";
     [SerializeField] private LevelConfig levelConfig;
 
     private void Start()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+    exitButton.SetActive(false);
+#endif
+
         ShowPanel(mainPanel);
 
         ServiceLocator.Get<AudioManager>().PlayMenuMusic();
@@ -41,6 +47,8 @@ public class MainMenuManager : MonoBehaviour
     public void ExitGame()
     {
         Debug.Log("Exiting Game...");
+
+
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
