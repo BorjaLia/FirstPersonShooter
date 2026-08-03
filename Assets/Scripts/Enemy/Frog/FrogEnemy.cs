@@ -27,7 +27,6 @@ public class FrogEnemy : EnemyBase
         Explode();
         Destroy(gameObject);
 
-        ServiceLocator.Get<IGameplayManager>().RegisterEnemyDeath();
     }
 
     public void Explode()
@@ -150,6 +149,9 @@ public class FrogExplodeState : IState
         if (explosionCountown > 0.0f) return;
 
         frog.Explode();
+
+        ServiceLocator.Get<IGameplayManager>().RegisterEnemyDeath();
+
         Object.Destroy(frog.gameObject);
     }
     public void Exit() { }
