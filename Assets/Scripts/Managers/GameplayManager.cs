@@ -50,8 +50,10 @@ public class GameplayLevelManager : MonoBehaviour, IGameplayManager
 
     private void SpawnPlayer()
     {
+        Debug.Log("SpawnPlayer");
         if (currentLevelConfig.playerPrefab != null)
         {
+            Debug.Log("SpawnedPlayer");
             Instantiate(
                 currentLevelConfig.playerPrefab,
                 currentLevelConfig.playerSpawnPosition,

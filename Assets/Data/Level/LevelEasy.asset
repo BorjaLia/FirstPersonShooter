@@ -16,5 +16,5 @@ MonoBehaviour:
   playerSpawnPosition: {x: 38.7, y: 13.57, z: -119.1}
   enemiesToSpawn:
   - enemyPrefab: {fileID: 2079969085266288134, guid: 505ba20a190838d47b3b72386ecc5656, type: 3}
-    spawnPosition: {x: -5.82, y: 4.9, z: 14.28}
+    spawnPosition: {x: -5.82, y: 4.38, z: 14.28}
   winOnAllEnemiesDefeated: 1

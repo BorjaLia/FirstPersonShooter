@@ -25,6 +25,7 @@ public class MainMenuManager : MonoBehaviour
         if (levelConfig != null)
         {
             gameplayManager.SetConfig(levelConfig);
+            gameplayManager.StartLevel();
         }
         else
         {
