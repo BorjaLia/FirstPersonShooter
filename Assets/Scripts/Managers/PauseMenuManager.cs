@@ -9,6 +9,10 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject settingsPanel;
 
+    [Header("End Game Panels")]
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject losePanel;
+    
     [Header("Input")]
     [SerializeField] private InputActionReference pauseActionReference;
 
@@ -16,6 +20,7 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private string mainMenuSceneName = "MainMenu";
 
     private bool isSettingsOpen = false;
+    private bool isGameOver = false;
 
     private IGameplayManager gameplayManager;
 
@@ -23,11 +28,19 @@ public class PauseMenuManager : MonoBehaviour
     {
         gameplayManager = ServiceLocator.Get<IGameplayManager>();
 
+        gameplayManager.OnWinConditionMet += HandleWin;
+        gameplayManager.OnLoseConditionMet += HandleLose;
+
+        if (winPanel) winPanel.SetActive(false);
+        if (losePanel) losePanel.SetActive(false);
+
         ResumeGame();
     }
 
     private void Update()
     {
+        if (isGameOver) return;
+
         if (pauseActionReference != null && pauseActionReference.action.WasPressedThisFrame())
         {
             if (isSettingsOpen)
@@ -47,7 +60,41 @@ public class PauseMenuManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (gameplayManager != null)
+        {
+            gameplayManager.OnWinConditionMet -= HandleWin;
+            gameplayManager.OnLoseConditionMet -= HandleLose;
+        }
+
         ResetGameState();
+    }
+
+    private void HandleWin()
+    {
+        TriggerEndGameUI(winPanel);
+    }
+
+    private void HandleLose()
+    {
+        TriggerEndGameUI(losePanel);
+    }
+
+    private void TriggerEndGameUI(GameObject panelToShow)
+    {
+        if (isGameOver) return;
+        isGameOver = true;
+
+        Time.timeScale = 0f;
+        if (gameplayManager != null) gameplayManager.IsPaused = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        if (pausePanel) pausePanel.SetActive(false);
+        if (settingsPanel) settingsPanel.SetActive(false);
+
+        if (backgroundPanel) backgroundPanel.SetActive(true);
+        if (panelToShow) panelToShow.SetActive(true);
     }
 
     public void PauseGame()
