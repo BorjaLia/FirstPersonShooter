@@ -21,6 +21,10 @@ First person shooter
 
 [Eye Shoot Sound](https://pixabay.com/sound-effects/film-special-effects-slime-impact-352473/) by [Universfield](https://pixabay.com/es/users/universfield-28281460/)
 
+[Skeleton Punch Sound](https://pixabay.com/sound-effects/film-special-effects-punch-04-383965/) by [Universfield](https://pixabay.com/es/users/universfield-28281460/)
+
+[Skeleton Hit Sound](https://pixabay.com/sound-effects/film-special-effects-step-skeleton-47785/) by [freesound_community](https://pixabay.com/es/users/freesound_community-46691455/)
+
 [Gun Reload sound](https://pixabay.com/es/sound-effects/pel%C3%ADculas-y-efectos-especiales-gun-reload-511309/) by [DRAGON-STUDIO](https://pixabay.com/es/users/dragon-studio-38165424/)
 
 [Gun Shot sound](https://pixabay.com/es/sound-effects/pel%C3%ADculas-y-efectos-especiales-five-seven-gun-shot-and-silenced-104500/) by [freesound_community](https://pixabay.com/es/users/freesound_community-46691455/)
