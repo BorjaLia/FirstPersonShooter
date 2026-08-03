@@ -7,6 +7,8 @@ First person shooter
 
 [Frog](https://sketchfab.com/3d-models/frog-jump-a3e1dfd0a6134060a0e23d5772edb42f) by [Rukh3D](https://sketchfab.com/rukh3d)
 
+[Skeleton](https://www.fab.com/listings/8350bcac-ce96-4ce6-bae0-c2ea62258a9b) by [Romulo Lima](https://www.fab.com/sellers/Romulo%20Lima)
+
 [Ambient sound](https://pixabay.com/sound-effects/nature-forest-daytime-446356/) by [CapaholiczSFX](https://pixabay.com/users/capaholiczsfx-52209270/)
 
 [Game music](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100084&Search=Search) by [Kevin MacLeod](https://incompetech.com/)
