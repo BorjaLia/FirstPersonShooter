@@ -35,4 +35,9 @@ public class SettingsPanel : MonoBehaviour
     private void OnMasterVolumeChanged(float value) => _settingsManager.SetMasterVolume(value);
     private void OnMusicVolumeChanged(float value) => _settingsManager.SetMusicVolume(value);
     private void OnSFXVolumeChanged(float value) => _settingsManager.SetSFXVolume(value);
+
+    public void ExitSettings()
+    {
+        this.gameObject.SetActive(false);
+    }
 }
