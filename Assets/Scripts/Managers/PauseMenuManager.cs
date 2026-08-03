@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PauseMenuManager : MonoBehaviour
 {
     [Header("UI Panels")]
+    [SerializeField] private GameObject backgroundPanel;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject settingsPanel;
 
@@ -55,6 +56,7 @@ public class PauseMenuManager : MonoBehaviour
 
         gameplayManager.IsPaused = true;
 
+        if (backgroundPanel) backgroundPanel.SetActive(true);
         if (pausePanel) pausePanel.SetActive(true);
         if (settingsPanel) settingsPanel.SetActive(false);
 
@@ -69,6 +71,7 @@ public class PauseMenuManager : MonoBehaviour
 
         gameplayManager.IsPaused = false;
 
+        if (backgroundPanel) backgroundPanel.SetActive(false);
         if (pausePanel) pausePanel.SetActive(false);
         if (settingsPanel) settingsPanel.SetActive(false);
 
