@@ -36,7 +36,7 @@ public class MainMenuManager : MonoBehaviour
     }
 
     public void OpenSettings() => ShowPanel(settingsPanel);
-    public void OpenCredits() => ShowPanel(creditsPanel);
+    public void OpenCredits() => Application.OpenURL("https://github.com/BorjaLia/FirstPersonShooter/blob/main/README.md");
     public void BackToMain() => ShowPanel(mainPanel);
 
     public void ExitGame()
