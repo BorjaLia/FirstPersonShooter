@@ -69,7 +69,7 @@ public class FlyingEyeIdleState : IState
     public void Enter()
     {
         Debug.Log("Eye: Idle");
-        eye.anim.Play("Idle");
+        eye.anim.Play("idle");
         eye.agent.isStopped = true;
     }
 
@@ -154,6 +154,7 @@ public class FlyingEyeAttackState : IState
     public void Enter()
     {
         Debug.Log("Eye: Attacking!");
+
         eye.agent.isStopped = true;
         eye.agent.updateRotation = false;
 
@@ -172,7 +173,7 @@ public class FlyingEyeAttackState : IState
         attackTimer -= Time.deltaTime;
         if (attackTimer <= 0.0f)
         {
-            eye.anim.Play("Attack");
+            eye.anim.Play("atk01");
             eye.FireProjectile();
             attackTimer = eye.config.attackCooldown;
         }
