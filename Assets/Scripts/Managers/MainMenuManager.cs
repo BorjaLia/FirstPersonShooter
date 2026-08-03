@@ -6,7 +6,6 @@ public class MainMenuManager : MonoBehaviour
     [Header("UI Panels")]
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject settingsPanel;
-    [SerializeField] private GameObject creditsPanel;
 
     [Header("Level Data")]
     [SerializeField] private string gameplaySceneName = "Level";
@@ -54,6 +53,5 @@ public class MainMenuManager : MonoBehaviour
     {
         if (mainPanel) mainPanel.SetActive(panelToShow == mainPanel);
         if (settingsPanel) settingsPanel.SetActive(panelToShow == settingsPanel);
-        if (creditsPanel) creditsPanel.SetActive(panelToShow == creditsPanel);
     }
 }
