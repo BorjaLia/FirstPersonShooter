@@ -115,7 +115,7 @@ public class PlayerShooting : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, cam.farClipPlane, bulletLayerMask))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Mathf.Infinity, bulletLayerMask))
         {
             Debug.DrawRay(cam.transform.position, cam.transform.forward * hit.distance, Color.green);
             Debug.Log("Did Hit");

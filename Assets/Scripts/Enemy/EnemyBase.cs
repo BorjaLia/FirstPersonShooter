@@ -62,7 +62,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         currentHealth -= amount;
 
-        Debug.Log("Enemy: Yeouch!");
+        Debug.Log($"Enemy: Yeouch! {currentHealth}");
 
         audioManager.PlaySFXOnce(baseStats.hitSound);
 

@@ -381,7 +381,7 @@ MonoBehaviour:
   bulletLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  bulletDamage: 1.5
+  bulletDamage: 15
   bulletSFX: {fileID: 2315831782768919845, guid: cf2e59e2cbf2a0849b0ddad755bdc7ba, type: 3}
   bullets: {fileID: 8930789203493273935}
   gunShotSound: {fileID: 8300000, guid: ea1d17ab25b568b42accc0fed0443cd7, type: 3}
