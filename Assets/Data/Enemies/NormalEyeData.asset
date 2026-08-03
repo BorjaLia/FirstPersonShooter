@@ -25,4 +25,4 @@ MonoBehaviour:
   attackRange: 5
   attackCooldown: 2
   projectilePrefab: {fileID: 6705630347182243097, guid: 40652c7069d867b489926d71686fc19a, type: 3}
-  projectileSpeed: 20
+  projectileSpeed: 200

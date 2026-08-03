@@ -68,40 +68,31 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3300000, guid: 455995b8866658b42b3da7b1cab18535, type: 3}
-    - {fileID: 2300000, guid: 455995b8866658b42b3da7b1cab18535, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 100000, guid: 455995b8866658b42b3da7b1cab18535, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6707550358306280664}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 455995b8866658b42b3da7b1cab18535, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3478513555207650014}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 455995b8866658b42b3da7b1cab18535, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7203087944710800269}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 455995b8866658b42b3da7b1cab18535, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1268350632770240427}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 455995b8866658b42b3da7b1cab18535, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3970457080223849986}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 455995b8866658b42b3da7b1cab18535, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 346389580458880211}
   m_SourcePrefab: {fileID: 100100000, guid: 455995b8866658b42b3da7b1cab18535, type: 3}
 --- !u!1 &6705630347182243097 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 455995b8866658b42b3da7b1cab18535, type: 3}
   m_PrefabInstance: {fileID: 6705630347182341049}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6707550358306280664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6705630347182243097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30054e278cd6c8448abee3cb2e941a99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BulletImpact
-  lifetime: 5
 --- !u!198 &3478513555207650014
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4905,3 +4896,66 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+--- !u!54 &1268350632770240427
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6705630347182243097}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &3970457080223849986
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6705630347182243097}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5112112
+  m_Height: 1.6239221
+  m_Direction: 1
+  m_Center: {x: 0.034115314, y: -0.013772577, z: -0.11796063}
+--- !u!114 &346389580458880211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6705630347182243097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c40d813b40ad941b2eb5e321c3d98c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EyeBullet
+  lifetime: 5
