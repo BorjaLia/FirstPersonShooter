@@ -61,7 +61,6 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(float amount)
     {
         currentHealth -= amount;
-        anim.Play("Hit");
 
         Debug.Log("Enemy: Yeouch!");
 
