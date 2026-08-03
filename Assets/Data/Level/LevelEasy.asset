@@ -17,4 +17,12 @@ MonoBehaviour:
   enemiesToSpawn:
   - enemyPrefab: {fileID: 2079969085266288134, guid: 505ba20a190838d47b3b72386ecc5656, type: 3}
     spawnPosition: {x: -5.82, y: 4.38, z: 14.28}
+  - enemyPrefab: {fileID: 2079969085266288134, guid: 505ba20a190838d47b3b72386ecc5656, type: 3}
+    spawnPosition: {x: -12.27, y: 4.469, z: 14.26}
+  - enemyPrefab: {fileID: 2079969085266288134, guid: 505ba20a190838d47b3b72386ecc5656, type: 3}
+    spawnPosition: {x: -8.61, y: 3.8, z: 10.11}
+  - enemyPrefab: {fileID: 2079969085266288134, guid: 505ba20a190838d47b3b72386ecc5656, type: 3}
+    spawnPosition: {x: -0.1, y: 3.54, z: -2.52}
+  - enemyPrefab: {fileID: 2079969085266288134, guid: 505ba20a190838d47b3b72386ecc5656, type: 3}
+    spawnPosition: {x: -26.84, y: 4.062, z: -74.03}
   winOnAllEnemiesDefeated: 1

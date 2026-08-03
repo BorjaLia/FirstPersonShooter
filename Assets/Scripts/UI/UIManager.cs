@@ -66,7 +66,7 @@ public class UIManager : MonoBehaviour
     {
         if (progressText != null)
         {
-            progressText.text = $"Enemies: {totalEnemies - enemiesDefeated}";
+            progressText.text = $"Enemies: {enemiesDefeated} / {totalEnemies}";
         }
     }
 }
