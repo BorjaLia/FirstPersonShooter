@@ -44,10 +44,6 @@ public class SkeletonEnemy : EnemyBase
     }
 }
 
-// ==========================================
-// STATES
-// ==========================================
-
 public class SkeletonIdleState : IState
 {
     private SkeletonEnemy skeleton;
@@ -64,7 +60,6 @@ public class SkeletonIdleState : IState
     {
         float distance = Vector3.Distance(skeleton.transform.position, skeleton.playerTarget.position);
 
-        // Wake up and chase if player gets too close
         if (distance <= skeleton.config.detectionRange)
         {
             skeleton.ChangeState(skeleton.ChaseState);
@@ -82,23 +77,20 @@ public class SkeletonChaseState : IState
 
     public void Enter()
     {
-        skeleton.anim.Play("Walk"); // Or "Run" depending on your Animator
+        skeleton.anim.Play("Run");
         skeleton.agent.isStopped = false;
     }
 
     public void UpdateLogic()
     {
-        // Continuously update path towards the player
         skeleton.agent.SetDestination(skeleton.playerTarget.position);
 
         float distance = Vector3.Distance(skeleton.transform.position, skeleton.playerTarget.position);
 
-        // If close enough, start attacking
         if (distance <= skeleton.config.stoppingDistance)
         {
             skeleton.ChangeState(skeleton.AttackState);
         }
-        // If the player runs far away, give up and go back to idle
         else if (distance > skeleton.config.detectionRange * 1.5f)
         {
             skeleton.ChangeState(skeleton.IdleState);
@@ -118,27 +110,23 @@ public class SkeletonAttackState : IState
     public void Enter()
     {
         skeleton.agent.isStopped = true;
-        // Set timer to 0 so the skeleton attacks immediately upon entering range
         attackTimer = 0.0f;
     }
 
     public void UpdateLogic()
     {
-        // Force the skeleton to always face the player while attacking
         Vector3 lookPos = skeleton.playerTarget.position;
-        lookPos.y = skeleton.transform.position.y; // Keep it level so it doesn't tilt up/down
+        lookPos.y = skeleton.transform.position.y;
         skeleton.transform.LookAt(lookPos);
 
         float distance = Vector3.Distance(skeleton.transform.position, skeleton.playerTarget.position);
 
-        // If the player backed up, go back to chasing
         if (distance > skeleton.config.stoppingDistance)
         {
             skeleton.ChangeState(skeleton.ChaseState);
             return;
         }
 
-        // Handle attack cooldown
         attackTimer -= Time.deltaTime;
         if (attackTimer <= 0.0f)
         {

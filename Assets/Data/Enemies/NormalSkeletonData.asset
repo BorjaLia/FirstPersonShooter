@@ -17,7 +17,7 @@ MonoBehaviour:
   acceleration: 8
   attackDamage: 20
   detectionRange: 20
-  stoppingDistance: 1
-  attackSound: {fileID: 0}
-  hitSound: {fileID: 0}
+  stoppingDistance: 2
+  attackSound: {fileID: 8300000, guid: c5d895a013c61624abf9324282cf6465, type: 3}
+  hitSound: {fileID: 8300000, guid: 4974ce42f6fe7414db69255a1bc2659b, type: 3}
   attackCooldown: 1.2
