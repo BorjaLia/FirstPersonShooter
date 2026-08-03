@@ -117,7 +117,7 @@ public class PlayerShooting : MonoBehaviour
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Mathf.Infinity, bulletLayerMask))
         {
-            Debug.DrawRay(cam.transform.position, cam.transform.forward * hit.distance, Color.green,15.0f);
+            Debug.DrawRay(cam.transform.position, cam.transform.forward * hit.distance, Color.green, 10.0f);
             Debug.Log("Did Hit");
 
             if (hit.collider.CompareTag("Enemy"))
@@ -131,7 +131,7 @@ public class PlayerShooting : MonoBehaviour
         }
         else
         {
-            Debug.DrawRay(cam.transform.position, cam.transform.forward * 1000, Color.red, 15.0f);
+            Debug.DrawRay(cam.transform.position, cam.transform.forward * 1000, Color.red, 10.0f);
             Debug.Log("Did not Hit");
         }
     }
