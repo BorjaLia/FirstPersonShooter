@@ -2,31 +2,27 @@ using UnityEngine;
 
 public class GameSettingsManager
 {
-    private const string MasterVolumeKey = "Master";
-    private const string MusicVolumeKey = "Music";
-    private const string SFXVolumeKey = "SFX";
-
-    public float MasterVolume => PlayerPrefs.GetFloat(MasterVolumeKey, 1f);
-    public float MusicVolume => PlayerPrefs.GetFloat(MusicVolumeKey, 1f);
-    public float SFXVolume => PlayerPrefs.GetFloat(SFXVolumeKey, 1f);
-
+    public float MasterVolume => PlayerPrefs.GetFloat(AudioManager.MIXER_MASTER, 1f);
+    public float MusicVolume => PlayerPrefs.GetFloat(AudioManager.MIXER_MUSIC, 1f);
+    public float SFXVolume => PlayerPrefs.GetFloat(AudioManager.MIXER_SFX, 1f);
     public void SetMasterVolume(float value)
     {
-        PlayerPrefs.SetFloat(MasterVolumeKey, value);
-        PlayerPrefs.Save();
+        PlayerPrefs.SetFloat(AudioManager.MIXER_MASTER, value);
+        ServiceLocator.Get<AudioManager>()?.SetVolume(AudioManager.MIXER_MASTER, value);
     }
 
     public void SetMusicVolume(float value)
     {
-        PlayerPrefs.SetFloat(MusicVolumeKey, value);
-        PlayerPrefs.Save();
+        PlayerPrefs.SetFloat(AudioManager.MIXER_MUSIC, value);
+        ServiceLocator.Get<AudioManager>()?.SetVolume(AudioManager.MIXER_MUSIC, value);
     }
 
     public void SetSFXVolume(float value)
     {
-        PlayerPrefs.SetFloat(SFXVolumeKey, value);
-        PlayerPrefs.Save();
+        PlayerPrefs.SetFloat(AudioManager.MIXER_SFX, value);
+        ServiceLocator.Get<AudioManager>()?.SetVolume(AudioManager.MIXER_SFX, value);
     }
+
     public void SaveAll()
     {
         PlayerPrefs.Save();

@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
+    public const string MIXER_MASTER = "MasterVolume";
+    public const string MIXER_MUSIC = "MusicVolume";
+    public const string MIXER_SFX = "SFXVolume";
+
     [Header("Mixer")]
     [Tooltip("The main AudioMixer of the project")]
     [SerializeField] private AudioMixer mainMixer;
@@ -37,9 +41,9 @@ public class AudioManager : MonoBehaviour
     {
         GameSettingsManager settings = ServiceLocator.Get<GameSettingsManager>();
 
-        SetVolume("MasterVolume", settings.MasterVolume);
-        SetVolume("MusicVolume", settings.MusicVolume);
-        SetVolume("SFXVolume", settings.SFXVolume);
+        SetVolume(MIXER_MASTER, settings.MasterVolume);
+        SetVolume(MIXER_MUSIC, settings.MusicVolume);
+        SetVolume(MIXER_SFX, settings.SFXVolume);
     }
 
     private void OnDestroy()

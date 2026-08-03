@@ -9,7 +9,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject creditsPanel;
 
     [Header("Level Data")]
-    [SerializeField] private string gameplaySceneName = "GameplayScene";
+    [SerializeField] private string gameplaySceneName = "Level";
     [SerializeField] private LevelConfig levelConfig;
 
     private void Start()
