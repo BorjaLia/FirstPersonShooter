@@ -79,8 +79,7 @@ public abstract class EnemyBase : MonoBehaviour
 
         Debug.Log("Enemy died");
 
-        Collider col = GetComponent<Collider>();
-        if (col != null) col.enabled = false;
+        rb.freezeRotation = false;
 
         Destroy(gameObject, 3f);
 

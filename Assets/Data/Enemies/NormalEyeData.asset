@@ -18,11 +18,11 @@ MonoBehaviour:
   attackDamage: 20
   detectionRange: 20
   stoppingDistance: 1
-  attackSound: {fileID: 0}
-  hitSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 2d2d620517fa66f47acc5d4f61228194, type: 3}
+  hitSound: {fileID: 8300000, guid: 2d2d620517fa66f47acc5d4f61228194, type: 3}
   fleeRange: 15
   fleeDistance: 8
   attackRange: 5
   attackCooldown: 2
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 6705630347182243097, guid: 40652c7069d867b489926d71686fc19a, type: 3}
   projectileSpeed: 20

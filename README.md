@@ -17,6 +17,8 @@ First person shooter
 
 [Frog Explosion Sound](https://pixabay.com/es/sound-effects/pel%C3%ADculas-y-efectos-especiales-balloon-burst-383750/) by [Universfield](https://pixabay.com/es/users/universfield-28281460/)
 
+[Eye Shoot Sound](https://pixabay.com/sound-effects/film-special-effects-slime-impact-352473/) by [Universfield](https://pixabay.com/es/users/universfield-28281460/)
+
 [Gun Reload sound](https://pixabay.com/es/sound-effects/pel%C3%ADculas-y-efectos-especiales-gun-reload-511309/) by [DRAGON-STUDIO](https://pixabay.com/es/users/dragon-studio-38165424/)
 
 [Gun Shot sound](https://pixabay.com/es/sound-effects/pel%C3%ADculas-y-efectos-especiales-five-seven-gun-shot-and-silenced-104500/) by [freesound_community](https://pixabay.com/es/users/freesound_community-46691455/)
@@ -24,3 +26,4 @@ First person shooter
 [Font](https://fonts.google.com/selection?preview.text=Toon%20Shootout&categoryFilters=Appearance:%2FTheme%2FBlobby&preview.script=Latn) by [Toshi Omagari]() and [Jennifer Daniel]()
 
 [Ui assets](https://kenney-assets.itch.io/ui-pack) by [kenney](https://kenney-assets.itch.io/)
+
