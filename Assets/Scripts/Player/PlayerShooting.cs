@@ -182,4 +182,9 @@ public class PlayerShooting : MonoBehaviour
             }
         }
     }
+
+    public void AddAmmo(int amount)
+    {
+        totalAmmoReserves += amount;
+    }
 }
