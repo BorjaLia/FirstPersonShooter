@@ -24,6 +24,11 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private AudioClip gunShotSound;
     [SerializeField] private AudioClip reloadSound;
 
+    [Header("Ammo Reserves")]
+    [SerializeField] private int totalAmmoReserves = 120;
+    public event Action<int, int, int> OnAmmoChanged;
+
+
     [SerializeField] private Camera cam;
 
     private AudioManager audioManager;
@@ -39,6 +44,10 @@ public class PlayerShooting : MonoBehaviour
     private int currentMag;
 
     private IGameplayManager gameplayManager;
+
+    private void Awake() { ServiceLocator.Register(this); }
+    private void OnDestroy() { ServiceLocator.Unregister<PlayerShooting>(); }
+
     private void Start()
     {
         audioManager = ServiceLocator.Get<AudioManager>();
@@ -48,7 +57,9 @@ public class PlayerShooting : MonoBehaviour
 
         gameplayManager = ServiceLocator.Get<IGameplayManager>();
 
+        OnAmmoChanged?.Invoke(currentMag, magCapacity, totalAmmoReserves);
     }
+
 
     private void Update()
     {
@@ -96,6 +107,7 @@ public class PlayerShooting : MonoBehaviour
         lastShotTimer = timeBetweenShots;
 
         currentMag--;
+        OnAmmoChanged?.Invoke(currentMag, magCapacity, totalAmmoReserves);
 
         Debug.Log($"Mag: {currentMag} / {magCapacity}");
 
@@ -108,7 +120,7 @@ public class PlayerShooting : MonoBehaviour
             Debug.DrawRay(cam.transform.position, cam.transform.forward * hit.distance, Color.green);
             Debug.Log("Did Hit");
 
-            if(hit.collider.CompareTag("Enemy"))
+            if (hit.collider.CompareTag("Enemy"))
             {
                 hit.collider.gameObject.GetComponent<EnemyBase>().TakeDamage(bulletDamage);
             }
@@ -155,7 +167,14 @@ public class PlayerShooting : MonoBehaviour
             if (currentReloadTime <= 0.0f)
             {
                 currentReloadTime = 0.0f;
-                currentMag = magCapacity;
+
+                int bulletsNeeded = magCapacity - currentMag;
+                int bulletsToLoad = Mathf.Min(bulletsNeeded, totalAmmoReserves);
+
+                currentMag += bulletsToLoad;
+                totalAmmoReserves -= bulletsToLoad;
+
+                OnAmmoChanged?.Invoke(currentMag, magCapacity, totalAmmoReserves);
             }
         }
     }

@@ -7,6 +7,10 @@ public class GameplayLevelManager : MonoBehaviour, IGameplayManager
     public event Action OnWinConditionMet;
     public event Action OnLoseConditionMet;
 
+    public event Action<int, int> OnProgressChanged;
+    private int startingEnemyCount = 0;
+    private int enemiesDefeated = 0;
+
     public bool IsPaused { get; set; } = false;
 
     private LevelConfig currentLevelConfig;
@@ -46,6 +50,10 @@ public class GameplayLevelManager : MonoBehaviour, IGameplayManager
 
         SpawnPlayer();
         SpawnEnemies();
+
+        startingEnemyCount = activeEnemyCount;
+        enemiesDefeated = 0;
+        OnProgressChanged?.Invoke(enemiesDefeated, startingEnemyCount);
 
         ServiceLocator.Get<AudioManager>().PlayGameplayMusic();
 

@@ -47,13 +47,12 @@ public class PauseMenuManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        ResumeGame();
+        ResetGameState();
     }
 
     public void PauseGame()
     {
         Time.timeScale = 0f;
-
         gameplayManager.IsPaused = true;
 
         if (backgroundPanel) backgroundPanel.SetActive(true);
@@ -67,9 +66,8 @@ public class PauseMenuManager : MonoBehaviour
     public void ResumeGame()
     {
         isSettingsOpen = false;
-        Time.timeScale = 1f;
 
-        gameplayManager.IsPaused = false;
+        ResetGameState();
 
         if (backgroundPanel) backgroundPanel.SetActive(false);
         if (pausePanel) pausePanel.SetActive(false);
@@ -79,11 +77,25 @@ public class PauseMenuManager : MonoBehaviour
         Cursor.visible = false;
     }
 
+    private void ResetGameState()
+    {
+        Time.timeScale = 1f;
+        if (gameplayManager != null)
+        {
+            gameplayManager.IsPaused = false;
+        }
+    }
+
     public void RetryLevel()
     {
-        ResumeGame();
-
+        ResetGameState();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ExitToMainMenu()
+    {
+        ResetGameState();
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     public void OpenSettings()
@@ -98,11 +110,5 @@ public class PauseMenuManager : MonoBehaviour
         isSettingsOpen = false;
         if (settingsPanel) settingsPanel.SetActive(false);
         if (pausePanel) pausePanel.SetActive(true);
-    }
-
-    public void ExitToMainMenu()
-    {
-        ResumeGame();
-        SceneManager.LoadScene(mainMenuSceneName);
     }
 }

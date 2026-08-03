@@ -11,6 +11,11 @@ public class PlayerHealth : MonoBehaviour
 
     private float currentHealth = maxHealth;
 
+    public event Action<float, float> OnHealthChanged;
+
+    private void Awake() { ServiceLocator.Register(this); }
+    private void OnDestroy() { ServiceLocator.Unregister<PlayerHealth>(); }
+    private void Start() { OnHealthChanged?.Invoke(currentHealth, maxHealth); }
     public void TakeDamage(float damage)
     {
         if(damage < 0.0f)
@@ -27,6 +32,8 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = 0.0f;
             Die();
         }
+
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     public void TakeHealing(float healing)
@@ -37,11 +44,12 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     private void Die()
     {
         Debug.Log("Player died!");
-        Destroy(this.gameObject);
     }
 }

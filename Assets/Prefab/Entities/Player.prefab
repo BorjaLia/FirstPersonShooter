@@ -386,6 +386,7 @@ MonoBehaviour:
   bullets: {fileID: 8930789203493273935}
   gunShotSound: {fileID: 8300000, guid: ea1d17ab25b568b42accc0fed0443cd7, type: 3}
   reloadSound: {fileID: 8300000, guid: ca16875150f01db4788b869642f2be08, type: 3}
+  totalAmmoReserves: 120
   cam: {fileID: 7666224746802916685}
 --- !u!114 &7340773049308303501
 MonoBehaviour:
