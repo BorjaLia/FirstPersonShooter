@@ -124,6 +124,10 @@ public class PlayerShooting : MonoBehaviour
             {
                 hit.collider.gameObject.GetComponent<EnemyBase>().TakeDamage(bulletDamage);
             }
+            else if (hit.collider.CompareTag("Prop"))
+            {
+                hit.collider.gameObject.GetComponent<PhysicsProp>().TakeHit(-hit.normal);
+            }
             else
             {
                 Instantiate(bulletSFX, hit.point, Quaternion.LookRotation(-hit.normal));
