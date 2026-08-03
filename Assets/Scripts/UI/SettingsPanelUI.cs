@@ -8,6 +8,9 @@ public class SettingsPanel : MonoBehaviour
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider sfxVolumeSlider;
 
+    [SerializeField] private GameObject previousPanel;
+
+
     private GameSettingsManager _settingsManager;
 
     private void OnEnable()
@@ -38,6 +41,11 @@ public class SettingsPanel : MonoBehaviour
 
     public void ExitSettings()
     {
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
+
+        if (previousPanel != null)
+        {
+            previousPanel.SetActive(true);
+        }
     }
 }

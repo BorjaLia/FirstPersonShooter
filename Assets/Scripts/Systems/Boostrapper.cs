@@ -16,7 +16,8 @@ public static class Boostrapper
 
         if (systemsPrefab != null)
         {
-            Object.Instantiate(systemsPrefab);
+            GameObject system = Object.Instantiate(systemsPrefab);
+            Object.DontDestroyOnLoad(system);
             Debug.Log("Systems Manager Instantiated Successfully.");
         }
         else

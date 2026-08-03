@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: LevelEasy
   m_EditorClassIdentifier: Assembly-CSharp::LevelConfigSO
   playerPrefab: {fileID: 6906350855942301854, guid: 7055b154807671e498f3360184782748, type: 3}
-  playerSpawnPosition: {x: 47.7, y: 9.76, z: -179.2}
+  playerSpawnPosition: {x: 38.7, y: 13.57, z: -119.1}
   enemiesToSpawn:
   - enemyPrefab: {fileID: 2079969085266288134, guid: 505ba20a190838d47b3b72386ecc5656, type: 3}
-    spawnPosition: {x: -40.09, y: 4.9, z: -56.65}
+    spawnPosition: {x: -5.82, y: 4.9, z: 14.28}
   winOnAllEnemiesDefeated: 1

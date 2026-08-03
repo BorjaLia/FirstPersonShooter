@@ -14,6 +14,7 @@ public static class ServiceLocator
             Debug.LogWarning($"Service of type {type.Name} is already registered.");
             return;
         }
+        Debug.Log($"Service of type {type.Name} registered.");
         _services.Add(type, service);
     }
 

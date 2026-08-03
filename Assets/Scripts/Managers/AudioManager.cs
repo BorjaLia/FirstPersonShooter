@@ -31,7 +31,6 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         ServiceLocator.Register<AudioManager>(this);
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

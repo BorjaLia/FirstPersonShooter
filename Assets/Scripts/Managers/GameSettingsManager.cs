@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class GameSettingsManager
 {
-    private const string MasterVolumeKey = "MasterVolume";
-    private const string MusicVolumeKey = "MusicVolume";
-    private const string SFXVolumeKey = "SFXVolume";
+    private const string MasterVolumeKey = "Master";
+    private const string MusicVolumeKey = "Music";
+    private const string SFXVolumeKey = "SFX";
 
     public float MasterVolume => PlayerPrefs.GetFloat(MasterVolumeKey, 1f);
     public float MusicVolume => PlayerPrefs.GetFloat(MusicVolumeKey, 1f);
