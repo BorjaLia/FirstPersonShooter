@@ -25,4 +25,26 @@ MonoBehaviour:
     spawnPosition: {x: -0.1, y: 3.54, z: -2.52}
   - enemyPrefab: {fileID: 2079969085266288134, guid: 505ba20a190838d47b3b72386ecc5656, type: 3}
     spawnPosition: {x: -26.84, y: 4.062, z: -74.03}
+  - enemyPrefab: {fileID: 5806542287406105746, guid: 51738880b6f58e94db029645571953b7, type: 3}
+    spawnPosition: {x: -70.30874, y: 5.77, z: -81.18856}
+  - enemyPrefab: {fileID: 5806542287406105746, guid: 51738880b6f58e94db029645571953b7, type: 3}
+    spawnPosition: {x: -63.63, y: 6.27, z: -76.18}
+  - enemyPrefab: {fileID: 5806542287406105746, guid: 51738880b6f58e94db029645571953b7, type: 3}
+    spawnPosition: {x: 28.26, y: 5.04, z: 2.34}
+  - enemyPrefab: {fileID: 5806542287406105746, guid: 51738880b6f58e94db029645571953b7, type: 3}
+    spawnPosition: {x: -19.6, y: 9.75, z: 48.1}
+  - enemyPrefab: {fileID: 7039616474550463271, guid: d736b0bbeb2b00e4480beca7fea625bb, type: 3}
+    spawnPosition: {x: -11.31, y: 4.323863, z: 18.17}
+  - enemyPrefab: {fileID: 7039616474550463271, guid: d736b0bbeb2b00e4480beca7fea625bb, type: 3}
+    spawnPosition: {x: 33.5, y: 2.81, z: -7.47}
+  - enemyPrefab: {fileID: 7039616474550463271, guid: d736b0bbeb2b00e4480beca7fea625bb, type: 3}
+    spawnPosition: {x: -31.89, y: 6.64, z: -118.2}
+  - enemyPrefab: {fileID: 7039616474550463271, guid: d736b0bbeb2b00e4480beca7fea625bb, type: 3}
+    spawnPosition: {x: -34.83, y: 6.64, z: -117.89}
+  - enemyPrefab: {fileID: 7039616474550463271, guid: d736b0bbeb2b00e4480beca7fea625bb, type: 3}
+    spawnPosition: {x: -55.08, y: 3.58, z: -62.37}
+  - enemyPrefab: {fileID: 7039616474550463271, guid: d736b0bbeb2b00e4480beca7fea625bb, type: 3}
+    spawnPosition: {x: -29.2, y: 4.34, z: -33}
+  - enemyPrefab: {fileID: 7039616474550463271, guid: d736b0bbeb2b00e4480beca7fea625bb, type: 3}
+    spawnPosition: {x: -22.83, y: 3.98, z: -34.65}
   winOnAllEnemiesDefeated: 1
