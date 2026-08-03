@@ -22,11 +22,16 @@ public class FrogEnemy : EnemyBase
         ChangeState(IdleState);
     }
 
-    protected override void Die()
+    public override void Die()
     {
-        Explode();
-        Destroy(gameObject);
+        if (!isAlive) return;
 
+        isAlive = false;
+        Explode();
+
+        ServiceLocator.Get<IGameplayManager>().RegisterEnemyDeath();
+
+        Destroy(gameObject);
     }
 
     public void Explode()
@@ -90,6 +95,8 @@ public class FrogJumpState : IState
 
         jumpDir = (frog.transform.forward + frog.transform.up).normalized;
 
+        frog.rb.isKinematic = false;
+
         frog.agent.isStopped = true;
         frog.agent.updatePosition = false;
     }
@@ -101,6 +108,7 @@ public class FrogJumpState : IState
         if (distance <= frog.config.stoppingDistance)
         {
             frog.ChangeState(frog.ExplodeState);
+            return;
         }
 
         jumpTimer -= Time.deltaTime;
@@ -148,11 +156,7 @@ public class FrogExplodeState : IState
 
         if (explosionCountown > 0.0f) return;
 
-        frog.Explode();
-
-        ServiceLocator.Get<IGameplayManager>().RegisterEnemyDeath();
-
-        Object.Destroy(frog.gameObject);
+        frog.Die();
     }
     public void Exit() { }
 }

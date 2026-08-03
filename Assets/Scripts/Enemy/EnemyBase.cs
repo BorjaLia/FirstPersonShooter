@@ -18,6 +18,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected IState currentState;
 
+    protected bool isAlive;
+
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -25,6 +27,9 @@ public abstract class EnemyBase : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         rb.freezeRotation = true;
+        rb.isKinematic = true;
+
+        isAlive = true;
 
         if (playerTarget == null)
         {
@@ -46,6 +51,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (!isAlive) return;
+
         if (playerTarget == null) return;
 
         currentState?.UpdateLogic();
@@ -53,6 +60,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     public void ChangeState(IState newState)
     {
+        if (!isAlive) return;
+
         currentState?.Exit();
         currentState = newState;
         currentState?.Enter();
@@ -60,6 +69,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     public virtual void TakeDamage(float amount)
     {
+        if (!isAlive) return;
+
         currentHealth -= amount;
 
         Debug.Log($"Enemy: Yeouch! {currentHealth}");
@@ -72,17 +83,23 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
-    protected virtual void Die()
+    public virtual void Die()
     {
+        if (!isAlive) return;
+        isAlive = false;
+
         anim.Play("Die");
+
         agent.isStopped = true;
+        agent.updatePosition = false;
 
         Debug.Log("Enemy died");
 
         rb.freezeRotation = false;
-
-        Destroy(gameObject, 3f);
+        rb.isKinematic = false;
 
         ServiceLocator.Get<IGameplayManager>().RegisterEnemyDeath();
+
+        Destroy(gameObject, 3f);
     }
 }

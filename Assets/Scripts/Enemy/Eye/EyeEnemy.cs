@@ -25,6 +25,7 @@ public class FlyingEyeEnemy : EnemyBase
         ChangeState(IdleState);
     }
 
+
     public override void TakeDamage(float amount)
     {
         base.TakeDamage(amount);

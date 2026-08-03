@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         currentHealth -= damage;
+        Debug.Log($"got hit for{damage}");
 
         if(currentHealth <= 0.0f)
         {
